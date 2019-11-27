@@ -10,7 +10,6 @@ const cards = [
 ]
 
 const memoryContainer = document.querySelector('.memoryContainer');
-
 const startButton = document.querySelector('.startButton');
 const resetButton = document.querySelector('.resetButton')
 
@@ -34,13 +33,10 @@ const stringToHTML = str => {
     return div.firstChild;
   };
 
-
 // This function creates an image tag from the cards array
 const createCard = (image) => {
     return `<div class="memoryCard"><img class="frontFace" src="${image}"><img class="backFace" src="https://data2.polantis.com/image1000/data/286/276/8983/formats/17/96/Alucobond-Yellow_Green_313_d.jpg"></div>`
 }
-
-
 
 // This function generates the cards from the cards array to the DOM and appends it to the memoryContainer
 const generateCards = () => {
