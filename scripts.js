@@ -65,31 +65,68 @@ const memoryCards = document.querySelectorAll('.memoryCard');
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
+let lockBoard = false;
 
 function flipCard() {
+
+    if (lockBoard) {return;}
+
+    if (this === firstCard) {return;}
 
     this.classList.toggle('flip') 
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
+        
+        return;
+    } 
+
+    hasFlippedCard = false;
+    secondCard = this;
+        
+    checkForMatch();   
+} 
+
+function checkForMatch() {
+
+    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+    if (isMatch) {
+        disableCards();
     } else {
-        hasFlippedCard = false;
-        secondCard = this;
-        if (firstCard.dataset.framework === secondCard.dataset.framework) {
-            firstCard.removeEventListener('click', flipCard);
-            secondCard.removeEventListener('click', flipCard);
-        } else {
-            setTimeout(() => {
-                firstCard.classList.remove('flip');
-                secondCard.classList.remove('flip');
-            }, 1500);
-        }
+        unflipCards();
     }
-          
+  }
+
+
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+
+    resetBoard();
 }
 
+function unflipCards () {
+
+    lockBoard = true;
+
+    setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+
+        lockBoard = false;
+
+    }, 1500);
+}
+
+function resetBoard() {
+    [hasFlippedCard, lockBoard] = [false, false];
+    [firstCard, secondCard] = [null, null];
+}
 
 memoryCards.forEach((memoryCard) => {
     memoryCard.addEventListener('click', flipCard)
     })
+
+
