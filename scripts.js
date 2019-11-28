@@ -35,7 +35,9 @@ const stringToHTML = str => {
 
 // This function creates an image tag from the cards array
 const createCard = (image) => {
-    return `<div class="memoryCard"><img class="frontFace" src="${image}"><img class="backFace" src="https://data2.polantis.com/image1000/data/286/276/8983/formats/17/96/Alucobond-Yellow_Green_313_d.jpg"></div>`
+    return `<div class="memoryCard"><img class="frontFace" src="${image}">
+            <img class="backFace" src="https://www.dtgmart.com/wp-content/uploads/2015/05/bright-foil-red-heat-transfer-vinyl.jpg">
+    </div>`
 }
 
 // This function generates the cards from the cards array to the DOM and appends it to the memoryContainer
@@ -45,13 +47,12 @@ const generateCards = () => {
         memoryContainer.appendChild(stringToHTML(element));
     })
 }
-
+generateCards(); 
 // First shuffles the cards array
 // Then generates the cards to the DOM
 // Then disables the startbutton after clicked once
 const startGame = () => {
     shuffle(cards); //Shuffles the cards everytime the start button is pressed
-    generateCards(); 
     startButton.removeEventListener('click', startGame);
 }
 
@@ -60,10 +61,10 @@ resetButton.addEventListener('click', startGame);
 
 const memoryCards = document.querySelectorAll('.memoryCard');
 
-const flipCard = () => {
-    console.log('hi');
-}
 
-memoryCards.forEach(memoryCard => {
-    memoryCard.addEventListener('click', flipCard);
+
+memoryCards.forEach((memoryCard) => {
+    memoryCard.addEventListener('click', function flipCard() {
+        this.classList.toggle('flip')
+    })
 })
