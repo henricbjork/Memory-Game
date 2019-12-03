@@ -136,7 +136,7 @@ memoryCards.forEach((memoryCard) => {
 
 function startGame() {
     
-    shuffle();
+    setTimeout(shuffle, 500);
     
     memoryCards.forEach(card => {
         card.classList.remove('flip');
