@@ -132,7 +132,7 @@ memoryCards.forEach((memoryCard) => {
     memoryCard.addEventListener('click', flipCard)
     })
 
-
+shuffle();
 
 function startGame() {
     
