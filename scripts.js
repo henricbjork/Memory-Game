@@ -57,6 +57,7 @@ let lockBoard = false;
 function flipCard() {
 
     if (lockBoard) {return;}
+
     if (this === firstCard) {return;}
 
     this.classList.toggle('flip') 
@@ -74,6 +75,7 @@ function flipCard() {
     checkForMatch();   
 } 
 
+
 // this function checks for a match by comparing the data type of the cards
 function checkForMatch() {
 
@@ -86,6 +88,7 @@ function checkForMatch() {
     }
   }
 
+
 // This function disables the cards from flipping and is called in the checkForMatch function to prevent two matched cards from being flipped again.
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
@@ -93,6 +96,7 @@ function disableCards() {
 
     resetBoard();
 }
+
 
 function enableCards() {
     memoryCards.forEach((memoryCard) => {
@@ -118,10 +122,16 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
+function resetBoard() {
+    [hasFlippedCard, lockBoard] = [false, false];
+    [firstCard, secondCard] = [null, null];
+}
+
 // add the flip class when clicking on one of the cards, flipping the cards.
 memoryCards.forEach((memoryCard) => {
     memoryCard.addEventListener('click', flipCard)
     })
+
 
 
 function startGame() {
@@ -136,3 +146,4 @@ function startGame() {
     enableCards();
 
 }
+
