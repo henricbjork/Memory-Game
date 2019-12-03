@@ -13,18 +13,6 @@ const memoryContainer = document.querySelector('.memoryContainer');
 const startButton = document.querySelector('.startButton');
 const resetButton = document.querySelector('.resetButton')
 
-/**
- * Shuffles array in place.
- * @param {Array} a items An array containing the items.
- */
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
-
 // Helper function to prevent XSS injections
 // Creates an HTML element from string
 function stringToHTML (str) {
@@ -51,45 +39,100 @@ function generateCards() {
 // This generates the cards to the DOM on load
 generateCards(); 
 
-// First shuffles the cards array
-// Then disables the startbutton after clicked once
-function startGame() {
-    shuffle(cards); //Shuffles the cards everytime the start button is pressed
-    startButton.removeEventListener('click', startGame);
-}
-
-startButton.addEventListener('click', startGame);
-resetButton.addEventListener('click', startGame);
-
 const memoryCards = document.querySelectorAll('.memoryCard');
+
+startButton.addEventListener('click', startGame)
+
+// This function shuffles the card by randomizing the positioning within the flex box
+function shuffle() {
+    memoryCards.forEach(card => {
+        let randomPosition = Math.floor(Math.random() * 8);
+        card.style.order = randomPosition;
+})}
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
+let lockBoard = false;
 
 function flipCard() {
+
+    if (lockBoard) {return;}
+    if (this === firstCard) {return;}
 
     this.classList.toggle('flip') 
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
+        
+        return;
+    } 
+
+    hasFlippedCard = false;
+    secondCard = this;
+        
+    checkForMatch();   
+} 
+
+// this function checks for a match by comparing the data type of the cards
+function checkForMatch() {
+
+    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+    if (isMatch) {
+        disableCards();
     } else {
-        hasFlippedCard = false;
-        secondCard = this;
-        if (firstCard.dataset.framework === secondCard.dataset.framework) {
-            firstCard.removeEventListener('click', flipCard);
-            secondCard.removeEventListener('click', flipCard);
-        } else {
-            setTimeout(() => {
-                firstCard.classList.remove('flip');
-                secondCard.classList.remove('flip');
-            }, 1500);
-        }
+        unflipCards();
     }
-          
+  }
+
+// This function disables the cards from flipping and is called in the checkForMatch function to prevent two matched cards from being flipped again.
+function disableCards() {
+    firstCard.removeEventListener('click', flipCard);
+    secondCard.removeEventListener('click', flipCard);
+
+    resetBoard();
 }
 
+function enableCards() {
+    memoryCards.forEach((memoryCard) => {
+        memoryCard.addEventListener('click', flipCard)
+        })
+}
 
+function unflipCards () {
+
+    lockBoard = true;
+
+    setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+
+        lockBoard = false;
+
+    }, 1500);
+}
+
+function resetBoard() {
+    [hasFlippedCard, lockBoard] = [false, false];
+    [firstCard, secondCard] = [null, null];
+}
+
+// add the flip class when clicking on one of the cards, flipping the cards.
 memoryCards.forEach((memoryCard) => {
     memoryCard.addEventListener('click', flipCard)
     })
+
+
+function startGame() {
+    
+    shuffle();
+    
+    memoryCards.forEach(card => {
+        card.classList.remove('flip');
+        
+    })
+    
+    enableCards();
+
+}
