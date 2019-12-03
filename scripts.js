@@ -1,16 +1,23 @@
 const cards = [
     {image: "./img/björk.png", type: "bjork"},
-    {image: "./img/masterofpuppets.jpeg", type: "metallica"},
+    {image: "./img/unknown.jpg", type: "unknown"},
     {image: "./img/darkside.jpeg", type: "darkside"},
     {image: "./img/heroes.jpeg", type:"bowie"},
+    {image: "./img/abbey.jpeg", type:"abbey"},
+    {image: "./img/velvet.jpeg", type:"velvet"},
+    {image: "./img/zeppelin.jpg", type:"zeppelin"},
+    {image: "./img/pumpkins.jpg", type:"pumpkins"},
     {image: "./img/björk.png", type: "bjork"},
-    {image: "./img/masterofpuppets.jpeg", type: "metallica"},
+    {image: "./img/unknown.jpg", type: "unknown"},
     {image: "./img/darkside.jpeg", type: "darkside"},
-    {image: "./img/heroes.jpeg", type:"bowie"}
+    {image: "./img/heroes.jpeg", type:"bowie"},
+    {image: "./img/abbey.jpeg", type:"abbey"},
+    {image: "./img/velvet.jpeg", type:"velvet"},
+    {image: "./img/zeppelin.jpg", type:"zeppelin"},
+    {image: "./img/pumpkins.jpg", type:"pumpkins"}
 ]
 
 const memoryContainer = document.querySelector('.memoryContainer');
-const startButton = document.querySelector('.startButton');
 const resetButton = document.querySelector('.resetButton')
 
 // Helper function to prevent XSS injections
@@ -24,7 +31,7 @@ function stringToHTML (str) {
 // This function creates an image tag from the cards array
 function createCard(image, type) {
     return `<div class="memoryCard" data-framework="${type}"><img class="frontFace" src="${image}">
-            <img class="backFace" src="https://www.dtgmart.com/wp-content/uploads/2015/05/bright-foil-red-heat-transfer-vinyl.jpg">
+            <img class="backFace" src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/514dc845-04f5-4538-8a4f-869b64243265/1-2.jpg">
     </div>`
 }
 
@@ -41,7 +48,7 @@ generateCards();
 
 const memoryCards = document.querySelectorAll('.memoryCard');
 
-startButton.addEventListener('click', startGame)
+resetButton.addEventListener('click', startGame)
 
 // This function shuffles the card by randomizing the positioning within the flex box
 function shuffle() {
@@ -146,4 +153,7 @@ function startGame() {
     enableCards();
 
 }
+
+
+
 

@@ -1,0 +1,16 @@
+.resetButton,
+.startButton {
+    height: 44px;
+    width: 170px;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-family: 'Kalam', cursive;
+    border-radius: 4px;
+}
+.resetButton {
+    margin-top: 27px;
+}
+.startButton {
+    margin-bottom: 27px;
+}
