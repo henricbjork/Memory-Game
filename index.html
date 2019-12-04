@@ -8,6 +8,7 @@
     <link href="buttons.css" rel="stylesheet">
     <link href="header.css" rel="stylesheet">
     <link href="footer.css" rel="stylesheet">
+    <link href="overlay.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kalam|Roboto+Condensed&display=swap" rel="stylesheet">
 
 
@@ -18,17 +19,25 @@
     <header>
         <h1>MEMORY</h1>
         <p>Classic Albums Edition</p>
+        <p class="clickCounter">Click Count: 0<p>
     </header>
+
     
-    <button type="button" class="startButton">Start!</button>
-    
+    <section class="overlay">
+        <div class="buttons">
+            <button type="button" class="startButton">New Game</button>
+        </div>
+    </section>
+
     <section class="memoryContainer"></section>
     
-    <button type="button" class="resetButton">Reset</button>
+    <div class="buttons">
+        <button type="button" class="resetButton">Reset Game</button>
+    </div>
     
     <section class="albums">
     
-        <h1>Albums: </h1>
+        
     
     </section>
     

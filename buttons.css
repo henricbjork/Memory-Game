@@ -1,16 +1,26 @@
 .resetButton,
 .startButton {
-    height: 44px;
-    width: 170px;
-    background-color: black;
     color: white;
-    font-size: 20px;
     font-family: 'Kalam', cursive;
     border-radius: 4px;
 }
 .resetButton {
+    font-size: 20px;
     margin-top: 27px;
+    background-color: #ff6652;
+    height: 44px;
+    width: 170px;
 }
 .startButton {
+    font-size: 40px;
     margin-bottom: 27px;
+    height: 88px;
+    width: 300px;
+    background-color: #51a663;
+    transform: scale(0.8);
+    transition: 200ms;
+}
+.startButton:hover {
+    cursor: pointer;
+    transform: scale(1);
 }
