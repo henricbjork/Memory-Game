@@ -19,6 +19,8 @@ const cards = [
 
 const memoryContainer = document.querySelector('.memoryContainer');
 const resetButton = document.querySelector('.resetButton')
+const startButton = document.querySelector('.startButton')
+const body = document.querySelector('body');
 
 // Helper function to prevent XSS injections
 // Creates an HTML element from string
@@ -72,7 +74,7 @@ function flipCard() {
     if (!hasFlippedCard) {
         hasFlippedCard = true;
         firstCard = this;
-        
+
         return;
     } 
 
@@ -104,7 +106,7 @@ function disableCards() {
     resetBoard();
 }
 
-
+// This function is called in the startGame function in order to restart a finished game without the cards locking themselves from flipping after being flipped once during the previous game
 function enableCards() {
     memoryCards.forEach((memoryCard) => {
         memoryCard.addEventListener('click', flipCard)
@@ -129,31 +131,53 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
-function resetBoard() {
-    [hasFlippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
-}
-
 // add the flip class when clicking on one of the cards, flipping the cards.
 memoryCards.forEach((memoryCard) => {
     memoryCard.addEventListener('click', flipCard)
     })
 
+const overlay = document.querySelector('.overlay');
+
+startButton.addEventListener('click', () => {
+   overlay.classList.add('hidden');
+})
+
+//This function counts each click made
+let number = 1;
+const clickCounter = document.querySelector('.clickCounter');
+
+function mouseClicked() {
+
+    if (lockBoard === true){
+        return;
+    }
+
+  const element = clickCounter;
+  element.textContent = `Click count: ${number}`;
+  number++;
+  console.log(lockBoard);
+
+  
+}
+//This loop adds the clicks done function to each memorycard
+memoryCards.forEach(memoryCard => {
+    memoryCard.addEventListener('click', () => {
+        mouseClicked();
+    })
+})
+
 shuffle();
 
 function startGame() {
-    
+    clickCounter.innerHTML = "Click count: 0";
+    number = 1;
     setTimeout(shuffle, 500);
     
     memoryCards.forEach(card => {
         card.classList.remove('flip');
         
     })
-    
-    enableCards();
-
+    enableCards();  
 }
-
-
 
 

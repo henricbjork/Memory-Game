@@ -7,6 +7,7 @@ body {
     height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     font-family: 'Kalam', cursive;
 }
@@ -26,6 +27,12 @@ body {
     transform: scale(1);
     transform-style: preserve-3d;
     transition: transform .5s;
+    border-radius: 3px; 
+}
+.memoryCard.show {
+    /* opacity: 1;
+    transition: opacity 100ms ease-in, transform 300ms ease-in;
+    transform: translateY(0%); */
 }
 .memoryCard:active {
     transform: scale(.97);
@@ -45,3 +52,13 @@ body {
 .frontFace {
     transform: rotateY(180deg);
 }
+@media (min-width: 750px) {
+    .memoryContainer {
+        height: 800px;
+        width: 770px;
+    }
+    .memoryCard {
+        width: 160px;
+        height: 160px;   
+    }
+  }
