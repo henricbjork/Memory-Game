@@ -153,7 +153,7 @@ function mouseClicked() {
     }
 
   const element = clickCounter;
-  element.textContent = `Click count: ${number}`;
+  element.textContent = `Click Count: ${number}`;
   number++;
   console.log(lockBoard);
 
@@ -169,7 +169,7 @@ memoryCards.forEach(memoryCard => {
 shuffle();
 
 function startGame() {
-    clickCounter.innerHTML = "Click count: 0";
+    clickCounter.innerHTML = "Click Count: 0";
     number = 1;
     setTimeout(shuffle, 500);
     
