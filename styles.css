@@ -54,12 +54,12 @@ body {
 }
 @media (min-width: 750px) {
     .memoryContainer {
-        height: 600px;
-        width: 600px;
+        height: 500px;
+        width: 500px;
     }
     .memoryCard {
-        width: 110px;
-        height: 110px;  
+        width: 100px;
+        height: 100px;  
         margin: 10px; 
     }
   }
