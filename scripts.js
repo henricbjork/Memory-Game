@@ -45,12 +45,10 @@ function generateCards() {
     })
 }
 
-// This generates the cards to the DOM on load
+// This generates the cards to the DOM when the user loads the page
 generateCards(); 
 
 const memoryCards = document.querySelectorAll('.memoryCard');
-
-resetButton.addEventListener('click', startGame)
 
 // This function shuffles the card by randomizing the positioning within the flex box
 function shuffle() {
@@ -58,6 +56,9 @@ function shuffle() {
         let randomPosition = Math.floor(Math.random() * 8);
         card.style.order = randomPosition;
 })}
+
+// Invokes the shuffle function every time the user loads the page
+shuffle();
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
@@ -84,20 +85,6 @@ function flipCard() {
     checkForMatch();   
 } 
 
-
-// this function checks for a match by comparing the data type of the cards
-function checkForMatch() {
-
-    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
-    if (isMatch) {
-        disableCards();
-    } else {
-        unflipCards();
-    }
-  }
-
-
 // This function disables the cards from flipping and is called in the checkForMatch function to prevent two matched cards from being flipped again.
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
@@ -106,13 +93,14 @@ function disableCards() {
     resetBoard();
 }
 
-// This function is called in the startGame function in order to restart a finished game without the cards locking themselves from flipping after being flipped once during the previous game
+// This function is called in the resetGame function in order to restart a finished game without the cards locking themselves from flipping after being flipped once during the previous game
 function enableCards() {
     memoryCards.forEach((memoryCard) => {
         memoryCard.addEventListener('click', flipCard)
         })
 }
 
+// This function locks the board, removes flip class to make cards flip back again and the unlocks the board. This function is invoked in the isMatch function in case two flipped cards doesn't match
 function unflipCards () {
 
     lockBoard = true;
@@ -155,9 +143,6 @@ function mouseClicked() {
   const element = clickCounter;
   element.textContent = `Click Count: ${number}`;
   number++;
-  console.log(lockBoard);
-
-  
 }
 //This loop adds the clicks done function to each memorycard
 memoryCards.forEach(memoryCard => {
@@ -166,18 +151,44 @@ memoryCards.forEach(memoryCard => {
     })
 })
 
-shuffle();
+// Resets the click counter, shuffles the cards, removes the flip class from the cards to make them flip back and then invokes the enableCards function
+function resetGame() {
 
-function startGame() {
     clickCounter.innerHTML = "Click Count: 0";
     number = 1;
     setTimeout(shuffle, 500);
     
     memoryCards.forEach(card => {
         card.classList.remove('flip');
-        
     })
+
     enableCards();  
 }
 
+// Resets the game when clicking on reset button
+resetButton.addEventListener('click', resetGame)
+
+// Sets the score to 0 every time the user loads the page
+let score = 0;
+
+// this function checks for a match by comparing the data type of the cards. Adds +1 to score for every matched cards
+function checkForMatch() {
+
+    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+    if (isMatch) {
+        disableCards();
+        score++
+    } else {
+        unflipCards();
+    }
+    // This condition checks if every card has been matched and locks the board. A message of congratulations is displayed.
+    // It takes the
+    if (score === 8) {
+        lockBoard = true;
+        setTimeout(() => {
+            window.alert(`Well done! Your score is ${number - 1}`);
+        }, 500)
+    }
+  }
 
