@@ -187,7 +187,7 @@ function checkForMatch() {
     }
     // This condition checks if every card has been matched and locks the board. A message of congratulations is displayed.
     // It takes the
-    if (score === 2) {
+    if (score === 8) {
         lockBoard = true;
         setTimeout(() => {
             window.alert(`Well done! Your score is ${counter - 1}`);
