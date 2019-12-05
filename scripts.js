@@ -131,7 +131,7 @@ startButton.addEventListener('click', () => {
 })
 
 //This function counts each click made
-let number = 1;
+let counter = 1;
 const clickCounter = document.querySelector('.clickCounter');
 
 function mouseClicked() {
@@ -141,8 +141,8 @@ function mouseClicked() {
     }
 
   const element = clickCounter;
-  element.textContent = `Click Count: ${number}`;
-  number++;
+  element.textContent = `Click Count: ${counter}`;
+  counter++;
 }
 //This loop adds the clicks done function to each memorycard
 memoryCards.forEach(memoryCard => {
@@ -151,11 +151,14 @@ memoryCards.forEach(memoryCard => {
     })
 })
 
-// Resets the click counter, shuffles the cards, removes the flip class from the cards to make them flip back and then invokes the enableCards function
+// Unlocks the board, resets the score to 0, Resets the click counter, shuffles the cards, removes the flip class from the cards to make them flip back and then invokes the enableCards function
 function resetGame() {
 
+    lockBoard = false;
+    score = 0;
+
     clickCounter.innerHTML = "Click Count: 0";
-    number = 1;
+    counter = 1;
     setTimeout(shuffle, 500);
     
     memoryCards.forEach(card => {
@@ -184,10 +187,10 @@ function checkForMatch() {
     }
     // This condition checks if every card has been matched and locks the board. A message of congratulations is displayed.
     // It takes the
-    if (score === 8) {
+    if (score === 2) {
         lockBoard = true;
         setTimeout(() => {
-            window.alert(`Well done! Your score is ${number - 1}`);
+            window.alert(`Well done! Your score is ${counter - 1}`);
         }, 500)
     }
   }
