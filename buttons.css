@@ -1,5 +1,6 @@
 .resetButton,
-.startButton {
+.startButton,
+.psychButton {
     color: white;
     font-family: 'Kalam', cursive;
     border-radius: 4px;
@@ -26,4 +27,17 @@
     background-color: #51a663;
     transform: scale(0.8);
     transition: 200ms;
+}
+.psychButton {
+    font-size: 20px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 44px;
+    width: 170px;
+    background: linear-gradient(40deg, rgba(48,66,231,1) 0%, rgba(70,201,166,1) 21%, rgba(164,74,231,1) 50%, rgba(244,70,251,1) 76%, rgba(255,111,61,1) 100%);
+}
+button.psych {
+    background: linear-gradient(40deg, rgba(48,66,231,1) 0%, rgba(70,201,166,1) 21%, rgba(164,74,231,1) 50%, rgba(244,70,251,1) 76%, rgba(255,111,61,1) 100%);
 }

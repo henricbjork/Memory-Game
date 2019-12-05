@@ -9,3 +9,6 @@ header p {
 header {
     color: black;
 }
+header.newColor {
+    color: white;
+}
