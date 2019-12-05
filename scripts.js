@@ -20,7 +20,18 @@ const cards = [
 const memoryContainer = document.querySelector('.memoryContainer');
 const resetButton = document.querySelector('.resetButton')
 const startButton = document.querySelector('.startButton')
+const psychButton = document.querySelector('.psychButton');
+const header = document.querySelector('header');   
 const body = document.querySelector('body');
+const buttons = document.querySelectorAll('button');
+
+psychButton.addEventListener('click', () => {
+    body.classList.toggle('psychMode');
+    header.classList.toggle('newColor');
+    buttons.forEach(button => {
+        button.classList.toggle('psych');
+    })
+})
 
 // Helper function to prevent XSS injections
 // Creates an HTML element from string
@@ -33,7 +44,7 @@ function stringToHTML (str) {
 // This function creates an image tag from the cards array
 function createCard(image, type) {
     return `<div class="memoryCard" data-framework="${type}"><img class="frontFace" src="${image}">
-            <img class="backFace" src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/514dc845-04f5-4538-8a4f-869b64243265/1-2.jpg">
+            <img class="backFace" src="https://kateforman.co.uk/wp-content/uploads/2015/04/Red-Velvet.jpg">
     </div>`
 }
 
