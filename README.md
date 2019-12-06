@@ -1,4 +1,4 @@
-# Classic Albums Covers - The Memory Game!
+# Iconic Albums Covers - The Memory Game!
 <img src="https://media.giphy.com/media/lOCD8V992TQSk/source.gif" width="100%">
 
 ## Description
@@ -16,6 +16,9 @@ To start your game, click [here](https://album-memory.netlify.com/). All cards a
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Testers
+[Oskar Joss](https://github.com/OskarJoss)
+[Betsy Alva Soplin](https://github.com/milliebase)
+[Victor Ljungblad](https://github.com/Ljungblad)
 
 ## Author
 Henric Björkvall
