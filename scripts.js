@@ -25,14 +25,6 @@ const header = document.querySelector('header');
 const body = document.querySelector('body');
 const buttons = document.querySelectorAll('button');
 
-psychButton.addEventListener('click', () => {
-    body.classList.toggle('psychMode');
-    header.classList.toggle('newColor');
-    buttons.forEach(button => {
-        button.classList.toggle('psych');
-    })
-})
-
 // Helper function to prevent XSS injections
 // Creates an HTML element from string
 function stringToHTML (str) {
@@ -53,7 +45,7 @@ function generateCards() {
     cards.forEach((card) => {
         const image = createCard(card.image, card.type);
         memoryContainer.appendChild(stringToHTML(image));
-    })
+     })
 }
 
 // This generates the cards to the DOM when the user loads the page
@@ -108,7 +100,7 @@ function disableCards() {
 function enableCards() {
     memoryCards.forEach((memoryCard) => {
         memoryCard.addEventListener('click', flipCard)
-        })
+    })
 }
 
 // This function locks the board, removes flip class to make cards flip back again and the unlocks the board. This function is invoked in the isMatch function in case two flipped cards doesn't match
@@ -135,10 +127,10 @@ memoryCards.forEach((memoryCard) => {
     memoryCard.addEventListener('click', flipCard)
     })
 
-const overlay = document.querySelector('.overlay');
+    const overlay = document.querySelector('.overlay');
 
-startButton.addEventListener('click', () => {
-   overlay.classList.add('hidden');
+    startButton.addEventListener('click', () => {
+    overlay.classList.add('hidden');
 })
 
 //This function counts each click made
@@ -146,25 +138,22 @@ let counter = 1;
 const clickCounter = document.querySelector('.clickCounter');
 
 function mouseClicked() {
-
     if (lockBoard === true){
         return;
     }
-
-  const element = clickCounter;
-  element.textContent = `Click Count: ${counter}`;
-  counter++;
+    const element = clickCounter;
+    element.textContent = `Click Count: ${counter}`;
+    counter++;
 }
 //This loop adds the clicks done function to each memorycard
 memoryCards.forEach(memoryCard => {
     memoryCard.addEventListener('click', () => {
-        mouseClicked();
+    mouseClicked();
     })
 })
 
 // Unlocks the board, resets the score to 0, Resets the click counter, shuffles the cards, removes the flip class from the cards to make them flip back and then invokes the enableCards function
 function resetGame() {
-
     lockBoard = false;
     score = 0;
 
@@ -184,11 +173,9 @@ resetButton.addEventListener('click', resetGame)
 
 // Sets the score to 0 every time the user loads the page
 let score = 0;
-
 // this function checks for a match by comparing the data type of the cards. Adds +1 to score for every matched cards
 function checkForMatch() {
-
-    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
     if (isMatch) {
         disableCards();
@@ -196,8 +183,8 @@ function checkForMatch() {
     } else {
         unflipCards();
     }
+
     // This condition checks if every card has been matched and locks the board. A message of congratulations is displayed.
-    // It takes the
     if (score === 8) {
         lockBoard = true;
         setTimeout(() => {
@@ -206,3 +193,10 @@ function checkForMatch() {
     }
   }
 
+  psychButton.addEventListener('click', () => {
+    body.classList.toggle('psychMode');
+    header.classList.toggle('newColor');
+    buttons.forEach(button => {
+        button.classList.toggle('psych');
+    })
+})
